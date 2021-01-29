@@ -20,7 +20,7 @@ class UsuarioController {
             const usuario = req.body;
             return res.status(201).json(await usuarioService.cria(usuario));
         } catch (error) {
-        	console.log(error)
+            console.log(error)
             return res.status(500).json(error);
         }
     }
@@ -43,8 +43,8 @@ class UsuarioController {
 
     static login(req, res) {
         const token = criaTokenJWT(req.user);
-        res.setHeader('Authorization', token);
-        return res.status(200).json({'token':token})
+        res.set('Authorization', token);
+        return res.status(204).send(); //res.status(200).json({'token':token})
     }
 }
 
