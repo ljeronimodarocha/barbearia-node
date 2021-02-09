@@ -1,33 +1,26 @@
 'use strict';
+
+const { Model } = require("sequelize");
+
 module.exports = {
     up: async(queryInterface, Sequelize) => {
-        await queryInterface.createTable('Agendamentos', {
+        await queryInterface.createTable('horarios-Livres', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            nome: {
-                type: Sequelize.STRING
-            },
-            email: {
-                type: Sequelize.STRING
-            },
-            dataAgendamento: {
+            dataInicial: {
                 type: Sequelize.DATE
             },
-            dataCancelamento: {
+            dataFinal: {
                 type: Sequelize.DATE
-            },
-            ativo: {
-                type: Sequelize.BOOLEAN,
-                defaultValue: true
             },
             id_usuario: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
-                references: { model: 'Usuario', key: 'id' }
+                // references: { model: 'Usuario', key: 'id' }
             },
             createdAt: {
                 allowNull: false,
@@ -37,9 +30,9 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE
             }
-        }, );
+        });
     },
     down: async(queryInterface, Sequelize) => {
-        await queryInterface.dropTable('Agendamentos');
+        await queryInterface.dropTable('horarios-Livres');
     }
 };

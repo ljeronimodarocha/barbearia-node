@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            Agendamento.belongsToMany(models.Usuario, { foreignKey: 'id' })
         }
     };
     Agendamento.init({
@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
         email: DataTypes.STRING,
         dataAgendamento: DataTypes.DATE,
         dataCancelamento: DataTypes.DATE,
-        ativo: DataTypes.BOOLEAN
+        ativo: DataTypes.BOOLEAN,
+
     }, {
         sequelize,
         modelName: 'Agendamento',
