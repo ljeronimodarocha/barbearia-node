@@ -14,15 +14,13 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Agendamento.init({
-        nome: DataTypes.STRING,
-        email: DataTypes.STRING,
         dataAgendamento: DataTypes.DATE,
         dataCancelamento: DataTypes.DATE,
         ativo: DataTypes.BOOLEAN,
 
     }, {
         sequelize,
-        modelName: 'Agendamento',
+        modelName: 'Agendamentos',
     });
     return Agendamento;
 };

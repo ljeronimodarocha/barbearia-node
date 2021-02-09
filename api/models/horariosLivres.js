@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 
     }, {
         sequelize,
-        modelName: 'horarios-livres',
+        modelName: 'horariosLivres',
     });
     return horariosLivres;
 };

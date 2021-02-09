@@ -4,7 +4,7 @@ const { Model } = require("sequelize");
 
 module.exports = {
     up: async(queryInterface, Sequelize) => {
-        await queryInterface.createTable('horarios-Livres', {
+        await queryInterface.createTable('horariosLivres', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -12,15 +12,17 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             dataInicial: {
+                allowNull: false,
                 type: Sequelize.DATE
             },
             dataFinal: {
+                allowNull: false,
                 type: Sequelize.DATE
             },
             id_usuario: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
-                // references: { model: 'Usuario', key: 'id' }
+                references: { model: 'Usuario', key: 'id' }
             },
             createdAt: {
                 allowNull: false,
@@ -33,6 +35,6 @@ module.exports = {
         });
     },
     down: async(queryInterface, Sequelize) => {
-        await queryInterface.dropTable('horarios-Livres');
+        await queryInterface.dropTable('horariosLivres');
     }
 };
