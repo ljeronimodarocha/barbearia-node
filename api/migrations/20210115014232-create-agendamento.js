@@ -9,9 +9,11 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             dataAgendamento: {
+                unique: true,
                 type: Sequelize.DATE
             },
             dataCancelamento: {
+                unique: true,
                 type: Sequelize.DATE
             },
             ativo: {

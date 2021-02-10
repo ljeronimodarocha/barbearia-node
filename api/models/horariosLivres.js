@@ -2,6 +2,7 @@
 const {
     Model
 } = require('sequelize');
+const usuario = require('./usuario');
 module.exports = (sequelize, DataTypes) => {
     class horariosLivres extends Model {
         /**
@@ -12,13 +13,19 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
 
-            horariosLivres.belongsToMany(models.Usuario, { foreignKey: 'id' })
+            horariosLivres.belongsTo(models.Usuario, { foreignKey: 'usuario_id' })
         }
     };
     horariosLivres.init({
         dataInicial: DataTypes.DATE,
         dataFinal: DataTypes.DATE,
-
+        id_usuario: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: usuario,
+                key: 'id'
+            }
+        }
     }, {
         sequelize,
         modelName: 'horariosLivres',

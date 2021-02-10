@@ -12,10 +12,12 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             dataInicial: {
+                unique: true,
                 allowNull: false,
                 type: Sequelize.DATE
             },
             dataFinal: {
+                unique: true,
                 allowNull: false,
                 type: Sequelize.DATE
             },
