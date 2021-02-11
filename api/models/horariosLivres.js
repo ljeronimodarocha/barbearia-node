@@ -17,7 +17,12 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     horariosLivres.init({
-        dataInicial: DataTypes.DATE,
+        dataInicial: {
+            type: DataTypes.DATE,
+            validate: {
+                isDate: true,
+            }
+        },
         dataFinal: DataTypes.DATE,
         id_usuario: {
             type: DataTypes.INTEGER,

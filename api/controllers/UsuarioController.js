@@ -20,8 +20,11 @@ class UsuarioController {
             const usuario = req.body;
             return res.status(201).json(await usuarioService.cria(usuario));
         } catch (error) {
-            console.log(error)
-            return res.status(500).json(error);
+            const objErrors = {};
+            error.errors.map((e) => {
+                objErrors[e.path] = e.message;
+            });
+            return res.status(404).json(objErrors);
         }
     }
     static async listaUsuarios(req, res) {
