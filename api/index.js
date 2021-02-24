@@ -1,6 +1,7 @@
 const express = require('express')
 const routes = require('./routes')
 
+
 //const cors = require('./headers')
 
 const cors = require('cors')
@@ -18,7 +19,7 @@ app.use(cors({
 
 
 routes(app)
-
+process.env.TZ = 'UTC'
 
 app.listen(port, () => console.log(`servidor está rodando na porta ${port}`))
 

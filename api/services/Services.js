@@ -16,6 +16,9 @@ class Services {
     async buscaTodosOsRegistros(where = {}) {
         return await database[this.nomeModelo].findAll({ where: {...where } });
     }
+    async buscaUmRegistroComScopo(where = {}, nomeScopo) {
+        return await database[this.nomeModelo].scope(nomeScopo).findOne({ where: {...where } });
+    }
 }
 
 module.exports = Services;

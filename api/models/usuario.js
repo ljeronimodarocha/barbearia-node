@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Usuario.hasMany(models.horariosLivres, { foreignKey: 'usuario_id' });
-            Usuario.hasMany(models.Agendamento, { foreignKey: 'usuario_id' })
+            Usuario.hasMany(models.horariosLivres, { foreignKey: 'id' });
+            Usuario.hasMany(models.Agendamento, { foreignKey: 'id' })
         }
     };
     Usuario.init({
@@ -37,10 +37,6 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: {
                     args: true,
                     msg: "Required"
-                },
-                len: {
-                    args: [4, 32],
-                    msg: "String length is not in this range"
                 }
             }
         },
@@ -72,6 +68,11 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         defaultScope: {
             attributes: { exclude: ['senha', 'updatedAt', 'createdAt'] }
+        },
+        scopes: {
+            login: {
+
+            }
         },
         sequelize,
         modelName: 'Usuario',

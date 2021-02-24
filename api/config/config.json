@@ -4,7 +4,9 @@
         "password": "1234",
         "database": "barbearia",
         "host": "127.0.0.1",
-        "dialect": "mysql"
+        "dialect": "mysql",
+        "timezone": "-03:00"
+
     },
     "test": {
         "username": "root",
@@ -12,6 +14,7 @@
         "database": "database_test",
         "host": "127.0.0.1",
         "dialect": "mysql"
+
     },
     "production": {
         "username": "root",
@@ -19,5 +22,7 @@
         "database": "database_production",
         "host": "127.0.0.1",
         "dialect": "mysql"
+
+
     }
 }

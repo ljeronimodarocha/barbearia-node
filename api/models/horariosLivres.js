@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-
-            horariosLivres.belongsTo(models.Usuario, { foreignKey: 'usuario_id' })
+            horariosLivres.belongsTo(models.Usuario, { foreignKey: 'id_usuario' })
         }
     };
     horariosLivres.init({
@@ -27,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         id_usuario: {
             type: DataTypes.INTEGER,
             references: {
-                model: usuario,
+                model: 'Usuario',
                 key: 'id'
             }
         }

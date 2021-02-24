@@ -1,6 +1,6 @@
 const { Router } = require('express')
-const Agendamento = require('../controllers/AgendamentoController')
 const middlewaresAutenticacao = require('../config/middlewaresAutenticacao')
+const Agendamento = require('../controllers/AgendamentoController')
 
 const router = Router()
 router.get('/agendamentos', middlewaresAutenticacao.bearer, Agendamento.listaAgendamentos)
