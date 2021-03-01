@@ -17,11 +17,15 @@ class horariosController {
         try {
             let horarios = req.body;
             horarios.id_usuario = req.user.id;
-            return res.status(201).json(await hService.cria(horarios));
+            const retorno = await hService.cria(horarios);
+            return res.status(201).json(retorno);
         } catch (error) {
-            //console.log(erro);
-            return res.status(500).json(error);
+            if (error.name === "InvalidArgumentError") {
+                return res.status(400).json({ Erro: error.message })
+            }
+            return res.status(500).json(error.message);
         }
     }
+
 }
 module.exports = horariosController

@@ -3,6 +3,7 @@ const { estrategiaAutenticacao } = require('../config/estrategiaAutenticacao');
 const agendamento = require('./agendamentoRouter')
 const usuario = require('./usuarioRouter')
 const horarios = require('./horariosRouter')
+const tipo = require('./tipoRouter')
 module.exports = app => {
     app.use(
         bodyParser.json(),
@@ -10,5 +11,6 @@ module.exports = app => {
         agendamento,
         usuario,
         horarios,
+        tipo,
     )
 }
