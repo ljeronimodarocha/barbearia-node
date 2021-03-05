@@ -9,7 +9,7 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             tempo: {
-                type: Sequelize.DOUBLE,
+                type: Sequelize.INTEGER,
                 allowNull: false,
             },
             nome: {

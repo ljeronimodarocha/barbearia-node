@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Tipo.init({
-        tempo: DataTypes.DOUBLE,
+        tempo: DataTypes.INTEGER,
         nome: DataTypes.STRING
     }, {
         sequelize,
