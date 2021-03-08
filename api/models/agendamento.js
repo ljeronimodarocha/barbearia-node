@@ -3,7 +3,7 @@ const {
     Model
 } = require('sequelize');
 const usuario = require('./usuario');
-const tipo = require('./tipo');
+const tipoAgendamento = require('./tipoAgendamento');
 module.exports = (sequelize, DataTypes) => {
     class Agendamento extends Model {
         /**
@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Agendamento.belongsTo(models.Usuario, { foreignKey: 'usuario_id' })
-            Agendamento.belongsTo(models.Tipo, { foreignKey: 'tipo_id' })
+            Agendamento.belongsTo(models.Usuario, { foreignKey: 'id_usuario' })
+            Agendamento.belongsTo(models.TipoAgendamento, { foreignKey: 'id_tipo' })
         }
     };
     Agendamento.init({
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         id_tipo: {
             type: DataTypes.INTEGER,
             references: {
-                model: tipo,
+                model: tipoAgendamento,
                 key: 'id'
             }
         }
@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         modelName: 'Agendamento',
+        freezeTableName: true,
     });
     return Agendamento;
 };

@@ -2,15 +2,17 @@ const bcrypt = require('bcrypt');
 const Services = require("./Services")
 const database = require('../models');
 
-const saltRounds = 12;
-const salt = bcrypt.genSaltSync(saltRounds);
+//const saltRounds = 12;
+//const salt = bcrypt.genSaltSync(saltRounds);
 
 class UsuarioService extends Services {
     constructor() {
         super('Usuario');
     }
     async cria(usuario) {
-        const novaSenha = bcrypt.hashSync(usuario.senha, salt);
+        console.log(usuario.senha);
+        const novaSenha = await bcrypt.hash(usuario.senha, 12);
+
         usuario.senha = novaSenha;
         return await super.cria(usuario);
     }

@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         sexo: {
             type: DataTypes.STRING,
             validate: {
-                notEmpty: true,
+                notEmpty: { args: true, msg: "Required" },
                 isIn: {
                     args: [
                         ['M', 'F'],
