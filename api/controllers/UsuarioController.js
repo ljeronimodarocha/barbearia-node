@@ -25,7 +25,7 @@ class UsuarioController {
                 objErrors[e.path] = e.message;
             });
             console.log(objErrors);
-            return res.status(400).json(objErrors);
+            return res.status(422).json(objErrors);
         }
     }
     static async listaUsuarios(req, res) {
