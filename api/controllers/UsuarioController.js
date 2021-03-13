@@ -9,7 +9,7 @@ function criaTokenJWT(usuario) {
     const payload = {
         id: usuario.id
     }
-    const token = jwt.sign(payload, "ships", { expiresIn: '15m' });
+    const token = jwt.sign(payload, "ships", { expiresIn: '10m' });
     return token;
 };
 

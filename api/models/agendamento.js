@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             Agendamento.belongsTo(models.Usuario, { foreignKey: 'id_usuario' })
-            Agendamento.belongsTo(models.TipoAgendamento, { foreignKey: 'id_tipo' })
+            Agendamento.belongsTo(models.TipoAgendamento, { foreignKey: 'id_tipoAgendamento' })
         }
     };
     Agendamento.init({
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
                 key: 'id'
             }
         },
-        id_tipo: {
+        id_tipoAgendamento: {
             type: DataTypes.INTEGER,
             references: {
                 model: tipoAgendamento,

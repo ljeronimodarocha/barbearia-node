@@ -2,7 +2,7 @@ const Services = require("./Services");
 
 class TipoService extends Services {
     constructor() {
-        super('Tipo')
+        super('TipoAgendamento')
     }
 
 }

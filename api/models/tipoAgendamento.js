@@ -15,8 +15,21 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     tipoAgendamento.init({
-        tempo: DataTypes.INTEGER,
-        nome: DataTypes.STRING
+        tempo: {
+            type: DataTypes.INTEGER,
+            validate: {
+                notEmpty: { msg: "Favor informar um tempo válido" },
+            }
+        },
+        nome: {
+            type: DataTypes.STRING,
+            unique: {
+                msg: "Nome já cadastrado."
+            },
+            validate: {
+                notEmpty: { msg: "Favor informar um nome válido" },
+            }
+        }
     }, {
         sequelize,
         modelName: 'TipoAgendamento',
