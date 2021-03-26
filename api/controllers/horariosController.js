@@ -1,12 +1,14 @@
 const { horariosService } = require('../services')
 const hService = new horariosService();
-
+process.env.TZ = 'UTC'
 
 class horariosController {
 
     static async buscaTodosHorarios(req, res) {
         try {
-            return res.status(200).json(await hService.buscaTodosOsRegistros());
+            const registros = await hService.buscaTodosOsRegistros()
+            console.log(registros);
+            return res.status(200).json(registros);
         } catch (error) {
             console.log(error);
 
