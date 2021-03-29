@@ -15,7 +15,7 @@ class AgendamentoController {
     static async adicionaAgendamento(req, res) {
         try {
             const agendamento = req.body;
-            const novoAgendament = await agendamentoService.cria(agendamento);
+            const novoAgendament = await agendamentoService.cria(agendamento, req.user);
             return res.status(201).json(novoAgendament);
         } catch (error) {
             return res.status(500).json(error.message);

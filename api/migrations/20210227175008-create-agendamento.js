@@ -8,7 +8,11 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            dataAgendamento: {
+            dataInicial: {
+                unique: true,
+                type: Sequelize.DATE
+            },
+            dataFinal: {
                 unique: true,
                 type: Sequelize.DATE
             },

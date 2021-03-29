@@ -1,7 +1,8 @@
-  const Services = require('./Services')
+  const Services = require('./Services');
   const database = require('../models');
+  const moment = require('moment')
   const { Op } = require("sequelize");
-
+  const { InvalidArgumentError } = require('../error/erros');
 
   class AgendamentoService extends Services {
       constructor() {
@@ -10,39 +11,52 @@
       async cancelarAgendamento(id) {
           return await super.atualizaUmObjeto({ ativo: false, dataCancelamento: new Date() }, {
               [Op.and]: { id, dataCancelamento: null }
-          })
+          });
       }
-      async cria(objeto) {
+      async cria(objeto, user) {
           const dataInicial = new Date(objeto.dataInicial);
-          const dataFinal = new Date(objeto.dataFinal);
-          if (dataInicial < dataFinal) {
-              const horaInicialPadrão = dataInicial.setHours(0, 0, 0)
-              const horaFinalPadrão = dataFinal.setHours(23, 59, 59)
-              const horario = await database['Agendamento'].findAll({
-                  where: {
-                      [Op.or]: [{
-                          dataInicial: {
-                              [Op.between]: [horaInicialPadrão,
-                                  horaFinalPadrão
-                              ]
-                          }
-                      }]
-                  }
-              })
-              if (horario.lenght != 0) {
-                  horario.forEach(element => {
-                      if (new Date(element.dataValues.dataInicial) <= new Date(objeto.dataFinal) && new Date(element.dataValues.dataFinal) >= new Date(objeto.dataInicial)) {
-                          const retornoDataInicial = moment(element.dataValues.dataInicial).format("YYYY-mm-DD HH:mm:ss")
-                          const retornoDataFinal = moment(element.dataValues.dataFinal).format("YYYY-mm-DD HH:mm:ss")
-                          throw new InvalidArgumentError(`Data inválida, já existe uma data neste intervalo: data inicial: ${retornoDataInicial}, data final: ${retornoDataFinal}`)
-                      }
-                  });
-
-              }
-              return await super.cria(objeto);
-          } else {
+          const tipo = await database['TipoAgendamento'].findOne({ where: { id: parseInt(objeto.tipo) } })
+          const dataFinal = moment(dataInicial).add(tipo.tempo, 'm').toDate();
+          if (tipo === null) {
+              throw new InvalidArgumentError("Tipo não cadastrado");
+          }
+          if (dataInicial > dataFinal) {
               throw new InvalidArgumentError(`A data inicial não pode ser maior que a data final!`)
           }
+          const horaInicialPadrão = new Date(dataInicial);
+          const horaFinalPadrão = new Date(dataFinal);
+          const horarioslivres = await database['horariosLivres'].findAll({
+              where: {
+                  [Op.or]: [{
+                      dataInicial: {
+                          [Op.between]: [dataInicial,
+                              dataFinal
+                          ]
+                      }
+                  }]
+              }
+          })
+          if (horarioslivres.lenght != 0) {
+              horarioslivres.forEach(element => {
+                  if (element.dataInicial <= dataInicial && ) {
+
+                  }
+              });
+          }
+
+          const agendamento = {
+              dataInicial: dataInicial,
+              dataFinal: dataFinal,
+              id_tipoAgendamento: tipo.id,
+              id_usuario: user.id
+          }
+          console.log(horarioslivres);
+          try {
+              await super.cria(agendamento)
+          } catch (error) {
+              throw new InvalidArgumentError(error.message)
+          }
+
       }
   }
 

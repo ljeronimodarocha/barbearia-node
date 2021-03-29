@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Agendamento.init({
-        dataAgendamento: DataTypes.DATE,
+        dataInicial: DataTypes.DATE,
+        dataFinal: DataTypes.DATE,
         dataCancelamento: DataTypes.DATE,
         ativo: DataTypes.BOOLEAN,
         id_usuario: {

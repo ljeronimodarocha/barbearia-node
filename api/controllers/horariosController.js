@@ -1,13 +1,12 @@
 const { horariosService } = require('../services')
 const hService = new horariosService();
-process.env.TZ = 'UTC'
+
 
 class horariosController {
 
     static async buscaTodosHorarios(req, res) {
         try {
-            const registros = await hService.buscaTodosOsRegistros()
-            console.log(registros);
+            const registros = await hService.buscaTodosOsRegistros();
             return res.status(200).json(registros);
         } catch (error) {
             console.log(error);
@@ -23,11 +22,11 @@ class horariosController {
             return res.status(201).json(retorno);
         } catch (error) {
             if (error.name === "InvalidArgumentError") {
-                return res.status(400).json({ Erro: error.message })
+                return res.status(400).json({ Erro: error.message });
             }
             return res.status(500).json(error.message);
         }
     }
 
 }
-module.exports = horariosController
+module.exports = horariosController;
