@@ -79,7 +79,7 @@
               }
               try {
                   console.log("criou");
-                  //await super.cria(agendamento);
+                  await super.cria(agendamento);
               } catch (error) {
                   throw new InvalidArgumentError(error.message);
               }
