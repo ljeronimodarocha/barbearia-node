@@ -1,6 +1,6 @@
 const Services = require('./Services')
 const database = require('../models');
-const Sequelize = require('Sequelize')
+const Sequelize = require('sequelize')
 const Op = Sequelize.Op;
 
 const { InvalidArgumentError } = require('../error/erros');

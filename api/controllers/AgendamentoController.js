@@ -18,7 +18,11 @@ class AgendamentoController {
             const novoAgendament = await agendamentoService.cria(agendamento, req.user);
             return res.status(201).json(novoAgendament);
         } catch (error) {
-            return res.status(500).json(error.message);
+            if (error.name === "InvalidArgumentError") {
+                return res.status(400).json(error.message);
+            } else {
+                return res.status(500).json(error);
+            }
         }
 
     }
@@ -37,6 +41,7 @@ class AgendamentoController {
             const { id } = req.params;
             return res.status(200).json(await agendamentoService.buscaUmRegistro({ id }));
         } catch (error) {
+
             return res.status(500).json(error.message);
         }
     }

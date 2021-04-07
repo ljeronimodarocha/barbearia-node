@@ -3,12 +3,9 @@
         "username": "root",
         "password": "1234",
         "database": "barbearia",
-        "host": "127.0.0.1",
-        "dialect": "mariadb",
-        "dialectOptions": {
-            "useUTC": false
-        },
-        "timezone": "-03:00"
+        "host": "node-mariadb",
+        "dialect": "mysql"
+
     },
     "test": {
         "username": "root",
