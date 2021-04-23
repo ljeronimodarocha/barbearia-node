@@ -8,10 +8,8 @@
       constructor() {
           super('Agendamento');
       }
-      async cancelarAgendamento(id) {
-          return await super.atualizaUmObjeto({ ativo: false, dataCancelamento: new Date() }, {
-              [Op.and]: { id, dataCancelamento: null }
-          });
+      async buscaUmRegistro(where = {}) {
+          return await database['TipoAgendamento'].findOne({ where: {...where } });
       }
       async cria(objeto, user) {
           const dataInicial = new Date(objeto.dataInicial);
@@ -86,6 +84,9 @@
           } else {
               throw new InvalidArgumentError("A data seleciona não entá dentro de um horário livre!");
           }
+      }
+      async buscaTodos(where = {}) {
+          return await database[this.nomeModelo].findOne({ where: {...where }, include: 'Usuario' });
       }
   }
 

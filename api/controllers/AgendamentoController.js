@@ -7,7 +7,7 @@ class AgendamentoController {
     static async listaAgendamentos(req, res) {
         try {
             const where = {}
-            return res.status(200).json(await agendamentoService.buscaTodosOsRegistros(where));
+            return res.status(200).json(await agendamentoService.buscaTodos(where));
         } catch (error) {
             return res.status(500).json(error.message);
         }
