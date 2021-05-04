@@ -7,7 +7,7 @@ class AgendamentoController {
     static async listaAgendamentos(req, res) {
         try {
             const where = {}
-            return res.status(200).json(await agendamentoService.buscaTodos(where));
+            return res.status(200).json(await agendamentoService.buscaTodos());
         } catch (error) {
             return res.status(500).json(error.message);
         }
@@ -15,11 +15,12 @@ class AgendamentoController {
     static async adicionaAgendamento(req, res) {
         try {
             const agendamento = req.body;
+
             const novoAgendament = await agendamentoService.cria(agendamento, req.user);
             return res.status(201).json(novoAgendament);
         } catch (error) {
             if (error.name === "InvalidArgumentError") {
-                return res.status(400).json(error.message);
+                return res.status(400).json(error);
             } else {
                 return res.status(500).json(error);
             }

@@ -1,7 +1,7 @@
   const Services = require('./Services');
   const database = require('../models');
   const moment = require('moment')
-  const { Op, json } = require("sequelize");
+  const { Op } = require("sequelize");
   const { InvalidArgumentError } = require('../error/erros');
 
   class AgendamentoService extends Services {
@@ -86,7 +86,7 @@
           }
       }
       async buscaTodos(where = {}) {
-          return await database[this.nomeModelo].findOne({ where: {...where }, include: 'Usuario' });
+          return await database[this.nomeModelo].findAll({ where: {...where }, include: 'Usuario' });
       }
   }
 
