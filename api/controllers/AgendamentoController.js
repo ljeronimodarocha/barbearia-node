@@ -1,3 +1,4 @@
+const { InvalidArgumentError } = require('../error/erros');
 const { AgendamentoService } = require('../services')
 
 const agendamentoService = new AgendamentoService();
@@ -15,14 +16,16 @@ class AgendamentoController {
     static async adicionaAgendamento(req, res) {
         try {
             const agendamento = req.body;
-
+            if (agendamento.dataInicial == "" || agendamento.tipo == "") {
+                throw new InvalidArgumentError("Data ou tipo inválidos");
+            }
             const novoAgendament = await agendamentoService.cria(agendamento, req.user);
             return res.status(201).json(novoAgendament);
         } catch (error) {
             if (error.name === "InvalidArgumentError") {
-                return res.status(400).json(error);
+                return res.status(400).json(error.message);
             } else {
-                return res.status(500).json(error);
+                return res.status(500).json(error.message);
             }
         }
 

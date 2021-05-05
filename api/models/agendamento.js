@@ -17,8 +17,18 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Agendamento.init({
-        dataInicial: DataTypes.DATE,
-        dataFinal: DataTypes.DATE,
+        dataInicial: {
+            type: DataTypes.DATE,
+            validate: {
+                notEmpty: { msg: "Favor informar uma data válida" },
+            }
+        },
+        dataFinal: {
+            type: DataTypes.DATE,
+            validate: {
+                notEmpty: { msg: "Favor informar uma data válida" },
+            }
+        },
         dataCancelamento: DataTypes.DATE,
         ativo: DataTypes.BOOLEAN,
         id_usuario: {
@@ -26,6 +36,9 @@ module.exports = (sequelize, DataTypes) => {
             references: {
                 model: usuario,
                 key: 'id'
+            },
+            validate: {
+                notEmpty: { msg: "Usuário inválido" }
             }
         },
         id_tipoAgendamento: {
@@ -33,6 +46,9 @@ module.exports = (sequelize, DataTypes) => {
             references: {
                 model: tipoAgendamento,
                 key: 'id'
+            },
+            validate: {
+                notEmpty: { msg: "Tipo do corte inválido" }
             }
         }
 
